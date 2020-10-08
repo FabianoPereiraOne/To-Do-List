@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
+.container-fluid{
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main{
+    height: 593px;
+}
+iframe{
+    height: 100%;
+    width: 100%;
+}
+.btn{
+    cursor: pointer;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.list-save{
+    text-align: center;
+    background-color: #4819a6;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #fff;
+    padding: 5px;
+    width: 100%;
+}
+.list-group{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tab-pane{
+    height: 593px;
+}
+#viewPort,#aside-right{
+    padding: 0;
+}
+#aside-left{
+    height: 550px;
+    overflow-y: auto;
+}
+.list-group-item{
+    position: relative;
+}
+.btn-fechar{
+    position: absolute;
+    left: 90%;
+    top: 0;
+    font-size: 1.5rem;
+    opacity: 0;
+}
+.btn-fechar:hover{
+    opacity: 1;
+}
