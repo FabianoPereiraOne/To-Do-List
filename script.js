@@ -8,7 +8,9 @@ const adicionar = document.getElementById("add")
 var nota = []
 var c = 0
 var pagesFromPainel
-
+var array
+var button
+var text
 createPainel = () =>{
     pagesFromPainel = []
 
@@ -24,8 +26,35 @@ createPainel = () =>{
 
     // adicionar os botoes criados na tela
     asideRight.appendChild(pagesFromPainel[c])
-    console.log("Painel criado")
-    getAddItens()
+    createNewArray()
+}
+createNewArray = () =>{
+    button = document.getElementById(`btn${c}`).innerHTML
+    array = new Array()
+    array.id = `array${c}`
+    updateArray()
+}
+updateArray = () =>{
+    localStorage.setItem(button,JSON.stringify(array))
+    addItensToList()
+}
+addItensToList = () =>{
+    adicionar.onclick = () =>{
+        text = document.getElementById("text")
+
+        if(text.value != "" || text.value != null){
+            array.push(text.value)
+            updateArray()
+            updateItemViewport()
+        }else{
+
+        }
+        
+    }   
+    
+}
+updateItemViewport = () =>{
+    let obj = document.getElementById(`page-link${c}`)
 }
 createButtons = () =>{
     let grupoButtons = []
@@ -46,13 +75,6 @@ createButtons = () =>{
     grupoButtons[c].setAttribute("data-nome",nameButtons[c])
     grupoButtons[c].setAttribute("data-number",c)
 
-    grupoButtons[c].onclick = () =>{
-        let nome = event.target.dataset.nome
-        let num = event.target.dataset.number
-
-        localStorage.setItem("ListaAtiva",nome)
-        localStorage.setItem("NumListaAtiva",num)
-    }
     if(c == 0){
         grupoButtons[c].classList.add("active")
     }
@@ -60,39 +82,6 @@ createButtons = () =>{
     // adicionar os botoes criados na tela
     asideLeft.appendChild(grupoButtons[c])
     createPainel()
-    c++
-}
-getAddItens = () =>{
-    console.log("Função adicionar ativa")
-    adicionar.onclick = () =>{
-        let item = document.getElementById("text")
-
-        if(item.value == 0 || item.value == null){
-            alert("[erro] Não foi possivel adicionar esse item!")
-        }else{
-            let pos = localStorage.getItem("NumListaAtiva")
-
-            localStorage.setItem(nameButtons[pos],item)
-            addItemToList()
-        }
-    }
-}
-addItemToList = () =>{
-
-    for(let c = 0; c < nameButtons.length; c++) {
-        let ItensButton = []
-        ItensButton = localStorage.getItem("buttons")
-
-        console.log(ItensButton[c])
-
-        /*for (let i = 0; i < obj.value.length; i++) {
-            pagesFromPainel[c].innerHTML =`
-                <p>${ItensButton[i]}<p>
-            `
-        }*/
-        
-    }
-     
 }
 deleteButton = () =>{
     var obj = prompt("Qual lista deseja remover?")
@@ -147,7 +136,6 @@ iniciar = () =>{
         }
         newList.onclick = () => getNameButtons()
         removeList.onclick = ()=> deleteButton()
-        adicionar.onclick = () => addItemToList()
     }else{
         newList.onclick = () => getNameButtons()
         removeList.onclick = ()=> deleteButton()
